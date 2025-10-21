@@ -227,6 +227,13 @@ $('#hook_button').on('click', () => {
     $('#error').show();
   } else {
     $('#error').hide();
+    /* =================== 추가할 부분 시작 =================== */
+    /* Upstream Repository 주소 저장 */
+    const upstreamHook = $('#upstream_hook_input').val().trim();
+    chrome.storage.local.set({ BaekjoonHub_upstream_hook: upstreamHook }, () => {
+      console.log('Successfully set Upstream repo hook');
+    });
+    /* =================== 추가할 부분 종료 =================== */
     $('#success').text('Attempting to create Hook... Please wait.');
     $('#success').show();
 

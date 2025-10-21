@@ -36,6 +36,10 @@
           </select>
         </div>
 
+        <div class="field">
+          <label for="upstream_hook_input" style="color: white;">Upstream (Original) Repository:</label>
+        </div>
+        
         <!-- 프로그래밍 언어별 폴더 정리 옵션 -->
         <div class="field">
           <select id="org_option">
@@ -45,13 +49,16 @@
             <option value="language">Organize by Language</option>
           </select>
         </div>
+        
       </div>
     </div>
-
+    
     <div class="six wide column">
       <div class="ui form">
         <div class="field">
           <input autocomplete="off" id="name" placeholder="Repository Name" type="text" />
+          
+          <input type="text" id="upstream_hook_input" placeholder="colleague-username/study-repo">
         </div>
       </div>
     </div>
