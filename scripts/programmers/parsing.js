@@ -100,9 +100,9 @@ async function makeData(origin) {
     const solutionClassName = `Solution_${problemId}`; // 내부 풀이 클래스 이름
     const mainClassName = `PRO_${problemId}`;       // 실행용 public 클래스 이름 (파일명과 동일)
 
-    // 기존 코드의 'public class Solution'을 'class Solution_문제번호'로 변경
-    const modifiedSolutionClass = code.replace(/public\s+class\s+([A-Za-z_][A-Za-z0-9_]*)/, `class ${solutionClassName}`);
-
+    // 기존 코드의 'class Solution'을 'class Solution_문제번호'로 변경
+    const modifiedSolutionClass = code.replace(/(public\s*)?class\s*Solution/, `class ${solutionClassName}`);
+    
     // main 메서드를 포함하는 새로운 public 클래스 생성
     const mainClass = `
 public class ${mainClassName} {
