@@ -61,7 +61,7 @@ async function beginUpload(bojData) {
     /* prBody 입력 받은 값으로 교체 */
     // 사용자가 입력 취소하면 기본값('작성된 내용이 없습니다.')으로 변경
     // 프롬프트로 사용자에게 직접 알고리즘 유형 입력받기
-    const algorithmInput = prompt("알고리즘 분류를 입력하세요.\n(예: DFS, DP, 구현)", "");
+    const algorithmInput = prompt("알고리즘 분류를 입력하세요.\n (예: DFS, DP, 구현)", "");
     let algorithm;
     if (algorithmInput === '-') {
       algorithm = '';
@@ -73,7 +73,7 @@ async function beginUpload(bojData) {
     bojData.prBody = bojData.prBody.replace('#알고리즘유형#', algorithm);
     
     // 접근 방법 입력받기
-    const approachInput = prompt("어떻게 접근했나요? (줄바꿈은 \"\n \" 입력하세요.)", "");
+    const approachInput = prompt("어떻게 접근했나요? (줄바꿈은 \"\\n \" 입력하세요.)", "");
     let approach;
     if (approachInput === '-') {
       approach = '';
@@ -85,7 +85,7 @@ async function beginUpload(bojData) {
     bojData.prBody = bojData.prBody.replace('#접근방법#', approach);
 
     // 어려웠던 점 입력받기
-    const difficultInput = prompt("어떤 점이 어려웠나요? (줄바꿈은 \"\n \" 입력하세요.)", "");
+    const difficultInput = prompt("어떤 점이 어려웠나요? (줄바꿈은 \"\\n \" 입력하세요.)", "");
     let difficultPoints;
     if (difficultInput === '-') {
       difficultPoints = '';
