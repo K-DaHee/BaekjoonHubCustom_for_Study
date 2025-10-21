@@ -78,7 +78,7 @@ async function parseData() {
   const code = data.code;
   log('파싱 완료');
   // eslint-disable-next-line consistent-return
-  return makeData({ link, problemId, level, title, extension, code, runtime, memory, length, submissionTime, language});
+  return makeData({ link, problemId, level, title, extension, code, runtime, memory, length, submissionTime, language });
 }
 
 async function makeData(origin) {
@@ -89,21 +89,76 @@ async function makeData(origin) {
   * C++ 같은 경우에는 문자가 그대로 유지됩니다.
   * */
   const lang = (language === language.toUpperCase()) ? language.substring(0, 1) + language.substring(1).toLowerCase() : language
-  const directory = await getDirNameByOrgOption(`SWEA/${level}/${problemId}. ${convertSingleCharToDoubleChar(title)}`, lang);
-  const message = `[${level}] Title: ${title}, Time: ${runtime}, Memory: ${memory} -BaekjoonHub`;
-  const fileName = `${convertSingleCharToDoubleChar(title)}.${extension}`;
+
+  const nameForChange = "dahee";
+  const directory = await getDirNameByOrgOption(`src/SWEA/${nameForChange}`, lang);
+
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const currentMonth = months[new Date().getMonth()];
+  const message = `[${currentMonth}/다희] SWEA ${problemId} ${title}`;
+  
+  const fileName = `SWEA_${problemId}.${extension}`;
   const dateInfo = submissionTime ?? getDateString(new Date(Date.now()));
-  // prettier-ignore
-  const readme =
-    `# [${level}] ${title} - ${problemId} \n\n`
-    + `[문제 링크](${link}) \n\n`
-    + `### 성능 요약\n\n`
-    + `메모리: ${memory}, `
-    + `시간: ${runtime}, `
-    + `코드길이: ${length} Bytes\n\n`
-    + `### 제출 일자\n\n`
-    + `${dateInfo}\n\n`
-    + `\n\n`
-    + `> 출처: SW Expert Academy, https://swexpertacademy.com/main/code/problem/problemList.do`;
-  return { problemId, directory, message, fileName, readme, code };
+
+  const prBody = `
+  # 🧩 알고리즘 문제 풀이
+  ## 📝 문제 정보
+  - **플랫폼:** SW Expert Academy (SWEA)
+  - **문제 이름:** ${problemId} ${title}
+  - **문제 링크:** ${link}
+  - **난이도:** ${level}
+  - **알고리즘 유형:** #알고리즘유형#
+  - **제출 일자:** ${dateInfo}
+
+  ## 💡 문제 설명
+  ※ 직접 작성하세요.
+
+  ## ⏱️ 성능 요약
+  ### 메모리
+  ${memory} KB
+  ### 시간
+  ${runtime} ms
+  ### 코드길이
+  ${length} Bytes
+
+  ## 🤔 접근 방법
+  #접근방법#
+
+  ## 🤯 어려웠던 점
+  #어려웠던점#
+
+  ## 📚 배운 점
+  #배운점#
+
+  ## ✅ 자가 체크리스트
+  - [ ] 코드가 모든 테스트 케이스를 통과하나요?
+  - [ ] 코드에 주석을 충분히 달았나요?
+
+
+  > 출처: SW Expert Academy, https://swexpertacademy.com/main/code/problem/problemList.do
+  `;
+
+  let modifiedCode = code;
+
+  // Java 파일일 경우, 파일명에 맞춰 클래스명 변경
+  if (extension === 'java') {
+    let newClassName = `SWEA_${problemId}`;
+    modifiedCode = code.replace(/public\s+class\s+([A-Za-z_][A-Za-z0-9_]*)/, `public class ${newClassName}`);
+  }
+
+  // 패키지 추가
+  let finalCode = modifiedCode;
+  if (extension === 'java') {
+    const packageName = `package SWEA.${level};`;
+    finalCode = `${packageName}\n\n${modifiedCode}`;
+  }
+
+  return { 
+    problemId, 
+    directory, 
+    message, 
+    fileName, 
+    prBody, 
+    code: finalCode 
+  };
 }
