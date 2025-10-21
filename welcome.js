@@ -282,6 +282,18 @@ $('#unlink a').on('click', () => {
   $('#success').text('Successfully unlinked your current git repo. Please create/link a new hook.');
 });
 
+/* 저장된 레포지토리 정보 불러오기 */
+chrome.storage.local.get(['BaekjoonHub_hook', 'BaekjoonHub_upstream_hook'], (data) => {
+  // 포크된 내 레포지토리 주소 불러오기
+  if (data.BaekjoonHub_hook) {
+    $('#name').val(data.BaekjoonHub_hook);
+  }
+  // 원본(Upstream) 레포지토리 주소 불러오기
+  if (data.BaekjoonHub_upstream_hook) {
+    $('#upstream_hook_input').val(data.BaekjoonHub_upstream_hook);
+  }
+});
+
 /* Detect mode type */
 chrome.storage.local.get('mode_type', (data) => {
   const mode = data.mode_type;
