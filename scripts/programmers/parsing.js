@@ -105,19 +105,19 @@ async function makeData(origin) {
 
     // main 메서드를 포함하는 새로운 public 클래스 생성
     const mainClass = `
-    public class ${mainClassName} {
-      public static void main(String[] args) {
-          ${solutionClassName} s = new ${solutionClassName}();
-          // 테스트케이스를 활용해 코드를 실행코드 작성하시오.
-      }
-    }
+public class ${mainClassName} {
+  public static void main(String[] args) {
+      ${solutionClassName} s = new ${solutionClassName}();
+      // 테스트케이스를 활용해 코드를 실행코드 작성하시오.
+  }
+}
     `;
 
     // 패키지 선언문
     const packageName = `package PRO.${nameForChange};`;
 
     // 최종 코드를 조합: 패키지 선언부 + 실행용 클래스 + 풀이 클래스
-    finalCode = `${packageName}\n\n${mainClass}\n\n${modifiedSolutionClass}`;
+    finalCode = `${packageName}\n${mainClass}\n\n${modifiedSolutionClass}`;
   }
 
   return {
