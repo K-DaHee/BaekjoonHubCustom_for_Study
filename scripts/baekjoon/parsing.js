@@ -134,7 +134,7 @@ async function makeDetailMessageAndReadme(data) {
   let finalCode = modifiedCode;
   if (extension === 'java') {
     const packageName = `package BOJ.${nameForChange};`;
-    finalCode = `${packageName}\n\n${modifiedCode}`;
+    finalCode = `${packageName}\n${modifiedCode}`;
   }
 
   return {

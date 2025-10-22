@@ -150,7 +150,7 @@ async function makeData(origin) {
   let finalCode = modifiedCode;
   if (extension === 'java') {
     const packageName = `package SWEA.${level};`;
-    finalCode = `${packageName}\n\n${modifiedCode}`;
+    finalCode = `${packageName}\n${modifiedCode}`;
   }
 
   return { 
