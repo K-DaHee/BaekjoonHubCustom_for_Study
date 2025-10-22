@@ -57,6 +57,8 @@ async function makeData(origin) {
   const fileName = `PRO_${problemId}.${language_extension}`;
   const dateInfo = getDateString(new Date(Date.now()));
 
+  const clean_description = problem_description.replace(/<[^>]*>?/gm, '');
+
   const prBody = `
   # 🧩 알고리즘 문제 풀이
   ## 📝 문제 정보
@@ -68,7 +70,7 @@ async function makeData(origin) {
   - **제출 일자:** ${dateInfo}
 
   ## 💡 문제 설명
-  ${problem_description}
+  ${clean_description}
 
   ## ⏱️ 성능 요약
   ### 메모리
@@ -86,6 +88,7 @@ async function makeData(origin) {
   #배운점#
 
   ## ✅ 자가 체크리스트
+
   - [ ] 코드가 모든 테스트 케이스를 통과하나요?
   - [ ] 코드에 주석을 충분히 달았나요?
 
@@ -117,7 +120,7 @@ async function makeData(origin) {
     const packageName = `package PRO.${nameForChange};`;
 
     // 최종 코드를 조합: 패키지 선언부 + 실행용 클래스 + 풀이 클래스
-    finalCode = `${packageName}\n\n${mainClass}\n\n${modifiedSolutionClass}`;
+    finalCode = `${packageName}\n${mainClass}\n${modifiedSolutionClass}`;
   }
 
   return {

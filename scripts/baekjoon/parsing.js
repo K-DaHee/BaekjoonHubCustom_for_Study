@@ -74,6 +74,8 @@ async function makeDetailMessageAndReadme(data) {
   
   const dateInfo = submissionTime ?? getDateString(new Date(Date.now()));
   
+  const clean_description = problem_description.replace(/<[^>]*>?/gm, '');
+
   const clean_input = problem_input.replace(/<[^>]*>?/gm, '').trim();
   const clean_output = problem_output.replace(/<[^>]*>?/gm, '').trim();
   
@@ -88,7 +90,7 @@ async function makeDetailMessageAndReadme(data) {
   - **제출 일자:** ${dateInfo}
 
   ## 💡 문제 설명
-  ${problem_description}
+  ${clean_description}
 
   ### 입력
   ${clean_input}
