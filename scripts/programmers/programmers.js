@@ -48,14 +48,14 @@ async function beginUpload(bojData) {
     startUpload();
 
     // 접근 방법 입력받기
-    const approachInput = prompt("어떻게 접근했나요? (줄바꿈은 \"\\n \" 입력하세요.)", "");
+    const approachInput = prompt("어떻게 접근했나요?");
     let approach;
     if (approachInput === '-') {
       approach = '';
     } else if (approachInput === null || approachInput.trim() === '') {
       approach = '작성된 내용이 없습니다.';
     } else {
-      approach = approachInput.split('\\n').join('  \n');
+      approach = approachInput.replace(/\.\s+/g, '.  \n');
     }
     bojData.prBody = bojData.prBody.replace('#접근방법#', approach);
 
@@ -67,7 +67,7 @@ async function beginUpload(bojData) {
     } else if (difficultInput === null || difficultInput.trim() === '') {
       difficultPoints = '작성된 내용이 없습니다.';
     } else {
-      difficultPoints = difficultInput.split('\\n').join('  \n');
+      difficultPoints = difficultInput.replace(/\.\s+/g, '.  \n');
     }
     bojData.prBody = bojData.prBody.replace('#어려웠던점#', difficultPoints);
     
@@ -79,7 +79,7 @@ async function beginUpload(bojData) {
     } else if (learnedInput === null || learnedInput.trim() === '') {
       learnedPoints = '작성된 내용이 없습니다.';
     } else {
-      learnedPoints = learnedInput.split('\\n').join('  \n');
+      learnedPoints = learnedInput.replace(/\.\s+/g, '.  \n');
     }
     bojData.prBody = bojData.prBody.replace('#배운점#', learnedPoints);
 
