@@ -60,7 +60,7 @@ async function beginUpload(bojData) {
     bojData.prBody = bojData.prBody.replace('#접근방법#', approach);
 
     // 어려웠던 점 입력받기
-    const difficultInput = prompt("어떤 점이 어려웠나요? (줄바꿈은 \"\\n \" 입력하세요.)", "");
+    const difficultInput = prompt("어떤 점이 어려웠나요?");
     let difficultPoints;
     if (difficultInput === '-') {
       difficultPoints = '';
@@ -72,7 +72,7 @@ async function beginUpload(bojData) {
     bojData.prBody = bojData.prBody.replace('#어려웠던점#', difficultPoints);
     
     // 배운 점 입력받기
-    const learnedInput = prompt("무엇을 배웠나요? (줄바꿈은 \"\\n \" 입력하세요.)", "");
+    const learnedInput = prompt("무엇을 배웠나요?");
     let learnedPoints;
     if (learnedInput === '-') {
       learnedPoints = '';
